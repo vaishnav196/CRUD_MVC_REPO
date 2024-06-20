@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model ProductModel
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Name</label>
+        <input type="text" asp-for="Pname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Product Name">
+
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Category</label>
+        <select class="form-control" asp-for="Pcat">
+            <option>Electronics</option>
+            <option>Foods</option>
+            <option>Cloths</option>
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Image</label>
+        <input type="file" asp-for="Pimg" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+
+    </div>
+    <br />
+    <div class="form-group">
+        <label for="exampleInputEmail1">Product Price</label>
+        <input type="text" asp-for="Price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

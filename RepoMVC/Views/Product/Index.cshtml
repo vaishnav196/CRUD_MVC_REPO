@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Product>
+
+<partial name="Notification"></partial>
+
+<a asp-controller="Product" asp-action="AddProduct"><input type="button" value="New Product" class="btn btn-info" /></a>
+
+@foreach(var d in Model)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" height="200" width="200" src="@d.Pimg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@d.Pname</h5>
+            
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Category : @d.Pcat</li>
+            <li class="list-group-item">Price : @d.Price</li>
+           
+        </ul>
+        <div class="card-body">
+            <input type="button" value="Add To Cart" class="btn btn-secondary">
+            <a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@d.Pid"><input onclick="return confirm('Are you Sure?')" type="button" value="Delete" class="btn btn-danger"></a>
+        </div>
+    </div>
+}
