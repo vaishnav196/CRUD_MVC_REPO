@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RepoMVC.Data;
 using RepoMVC.Models;
 using RepoMVC.Repo;
@@ -6,7 +7,7 @@ using RepoMVC.Repo;
 
 namespace RepoMVC.Controllers
 {
-   
+    [Authorize]
     public class EmpController : Controller
     {   private readonly EmpRepo empRepo;
         private readonly ApplicationDbContext db;
@@ -22,12 +23,19 @@ namespace RepoMVC.Controllers
             return View(dt);
         }
 
-        //public IActionResult Index(string searchTerm)
+        //public IActionResult Index(string searchp)
         //{
-        //    var obj=empRepo.SearchEmps(searchTerm);
-        //    return View(obj);
+        //    List<Emp> dt;
+        //    if (!string.IsNullOrEmpty(searchp))
+        //    {
+        //        dt = empRepo.SearchEmps(searchp);
+        //    }
+        //    else
+        //    {
+        //        dt = empRepo.GetAllEmps();
+        //    }
+        //    return View(dt);
         //}
-
         public IActionResult AddEmp()
         {
             return View();
@@ -81,11 +89,6 @@ namespace RepoMVC.Controllers
             }
         }
 
-        //[HttpGet]
-        //public IActionResult SearchEmps(string searchTerm)
-        //{
-        //    var result = empRepo.SearchEmps(searchTerm); // Ensure the method name is correct
-        //    return View(result); // Assuming you have a view for displaying search results
-        //}
+       
     }
 }

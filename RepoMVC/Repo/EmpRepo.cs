@@ -10,6 +10,8 @@ namespace RepoMVC.Repo
 
         void UpdateEmp(Emp e);
 
-        //List<Emp> SearchEmps(string searchTerm);
+       // List<Emp> SearchEmps(string searchTerm);
+
+        //List<Emp> DeleteSelectedEmps(List<int> ids);
     }
 }

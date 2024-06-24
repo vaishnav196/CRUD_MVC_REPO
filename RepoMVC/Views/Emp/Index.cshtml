@@ -11,82 +11,91 @@
 
 <a asp-controller="Emp" asp-action="AddEmp" class="btn btn-info mb-3">Add Emp</a>
 
-<form method="get" class="container">
-    <div class="form-group row">
-        <div class="col-6">
-            <input type="text" name="searchString" class="form-control mb-3" placeholder="Search by name..." />
 
-        </div>
-        <div class="col-6">
-            <button type="submit" class="btn  mb-3 btn-primary">Search</button>
 
-        </div>
+<form asp-controller="Emp" asp-action="Index" method="get" class="form-inline">
+    <div class="form-group">
+        <input type="text" id="srch" name="searchp" class="form-control form-control-md" placeholder="Search..." />
+    </div>
+    <br />
+    <div class="form-group ml-2">
+        <input type="submit" class="btn btn-sm btn-dark" value="Search" />
     </div>
 </form>
 
-@* <form id="searchForm" asp-action="SearchEmps" asp-controller="Emp" asp-action="Index" method="get">
-    <p style="font-family:Bahnschrift">
-        <input type="text" style="width:45%;height:35px" id="srch" name="searchString" value="@ViewData["CurrentFilter"]" />
-        <input type="submit" id="srchbtn" value="Search" class="btn" style="background-color:gainsboro" />
+<form asp-controller="Emp" asp-action="DeleteSelectedEmps" method="post" onsubmit="return confirm('Are you sure you want to delete the selected records?');">
+    <div class="d-flex justify-content-center my-4">
+        <button type="submit" class="btn btn-dark">Delete Items</button>
+    </div>
 
-    </p>
-</form> *@<
-
-
-<table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-            <th>
-              <input type="checkbox" id="select-all" />
-            </th>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Salary</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var i in Model)
-        {
+    <br />
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    <input type="checkbox" name="ids" value="@i.Id" />
-                </td>
-                <th scope="row">@i.Id</th>
-                <td>@i.Name</td>
-                <td>@i.Salary</td>
-                <td>
-                    <a asp-action="EditEmp" asp-controller="Emp" asp-route-id="@i.Id"><button class="btn btn-success" value="Edit">Edit</button></a>
-                    <a asp-action="RemoveEmp" asp-controller="Emp" asp-route-id="@i.Id"><button class="btn btn-danger" value="Delete" onclick='return confirm("Are You Sure to Delete this Record?")'>Delete</button></a>
+                <th scope="col">
+                    <input type="checkbox" id="selectAll" onclick="selectAllCheckboxes(this)" />
+                </th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selectedIds" value="@i.Id" />
+                    </td>
+                    <th scope="row">@i.Id</th>
+                    <td>@i.Name</td>
+                    <td>@i.Salary</td>
+                    <td>
+                        <a asp-action="UpdateEmp" asp-controller="Emp" asp-route-id="@i.Id">
+                            <button class="btn btn-success" type="button">Edit</button>
+                        </a>
+                        <a asp-action="DeleteEmp" asp-controller="Emp" asp-route-id="@i.Id">
+                            <button class="btn btn-danger" type="button" onclick='return confirm("Are You Sure to Delete this Record?")'>Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</form>
+
+
 
                 @section Scripts {
+
+  
+   @*  <link href="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/af-2.7.0/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/datatables.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-2.0.8/af-2.7.0/b-3.0.2/b-html5-3.0.2/b-print-3.0.2/datatables.min.js"></script>
+
     <script>
-        document.getElementById('select-all').onclick = function () {
-            var checkboxes = document.getElementsByName('ids');
-            for (var checkbox of checkboxes) {
-                checkbox.checked = this.checked;
+        $(document).ready(function () {
+            $('#mytable').DataTable({
+                dom: 'Bftip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ]
+            });
+        })
+    </script> *@
+
+
+    <script>
+        function selectAllCheckboxes(source) {
+            checkboxes = document.getElementsByName('selectedIds');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
             }
         }
-
-        document.getElementById('searchForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-
-            var searchString = document.getElementById('srch').value.toLowerCase();
-            var rows = document.querySelectorAll('#employeeTable tbody tr');
-
-            rows.forEach(row => {
-                var name = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-                if (name.includes(searchString)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
     </script>
 
             }

@@ -38,19 +38,9 @@ namespace RepoMVC.Services
             }
         }
 
-        //public List<Emp> SearchEmps(string searchTerm)
-        //{
-        //    List<Emp> data;
-        //    if (string.IsNullOrEmpty(searchTerm))
-        //    {
-        //        data = db.emps.ToList();
-        //    }
-        //    else
-        //    {
-        //        data=db.emps.Where(x=>x.Name.Contains(searchTerm) || x.Salary.ToString().Contains(searchTerm)).ToList();
-        //    }
-        //    return data;
-        //}
+       
+
+     
 
         public void UpdateEmp(Emp e)
         {
@@ -66,6 +56,30 @@ namespace RepoMVC.Services
                 db.SaveChanges();
             }
         }
-      
+
+        //public List<Emp> SearchEmps(string searchTerm)
+        //{
+        //    if (string.IsNullOrEmpty(searchTerm))
+        //    {
+        //        return db.emps.ToList();
+        //    }
+        //    else
+        //    {
+        //        return db.emps
+        //            .Where(x => x.Name.Contains(searchTerm) || x.Salary.ToString().Contains(searchTerm))
+        //            .ToList();
+        //    }
+        //}
+
+        //List<Emp> EmpRepo.DeleteSelectedEmps(List<int> ids)
+        //{
+        //    if (ids != null && ids.Count > 0)
+        //    {
+        //        var empsToDelete = db.emps.Where(e => ids.Contains(e.Id)).ToList();
+        //        db.emps.RemoveRange(empsToDelete);
+        //        db.SaveChanges();
+        //    }
+
+        //}
     }
 }

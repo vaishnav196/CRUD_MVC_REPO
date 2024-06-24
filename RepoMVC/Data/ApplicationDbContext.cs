@@ -14,5 +14,8 @@ namespace RepoMVC.Data
         }
         public DbSet<Emp> emps { get; set; }
         public DbSet<Product> products { get; set; }
+
+        public DbSet<User> users { get; set; }
+        public DbSet<RepoMVC.Models.Login> Login { get; set; } = default!;
     }
 }
